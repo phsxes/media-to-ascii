@@ -4,9 +4,9 @@ import generator.utilities
 
 root = Tk()
 root.title("Media to ASCII")
-root.geometry("825x450")
-root.resizable(width=False, height=False)
-src, res = None, None
+root.geometry("1200x600")
+root.resizable(width=True, height=True)
+panel1, panel2 = None, None
 
 
 def open_file():
@@ -22,22 +22,22 @@ def open_img():
 
 
 def update_panels(preview, result):
-    global src, res
+    global panel1, panel2
 
-    if src is None or res is None:
-        src = Label(image=preview)
-        src.image = preview
-        src.pack(side="left", padx=20, pady=20)
+    if panel1 is None or panel2 is None:
+        panel1 = Label(image=preview)
+        panel1.image = preview
+        panel1.pack(side="left", padx=20, pady=20)
 
-        res = Label(image=result)
-        res.image = result
-        res.pack(side="right", padx=20, pady=20)
+        panel2 = Label(image=result)
+        panel2.image = result
+        panel2.pack(side="right", padx=20, pady=20)
 
     else:
-        src.configure(image=preview)
-        res.configure(image=result)
-        src.image = preview
-        res.image = result
+        panel1.configure(image=preview)
+        panel2.configure(image=result)
+        panel1.image = preview
+        panel2.image = result
 
 
 btn = Button(root, text='Select Image', command=open_img)
