@@ -16,9 +16,11 @@ def open_file():
 
 def open_img():
     img_path = open_file()
-    image = generator.utilities.TkImage(img_path)
-    preview = image.get_preview(h=300)
-    update_panels(preview, preview)
+    source = generator.utilities.Image(img_path)
+    result = generator.utilities.Ascii(img_path)
+    preview_src = source.preview(h=500)
+    preview_res = result.preview(h=500)
+    update_panels(preview_src, preview_res)
 
 
 def update_panels(preview, result):
