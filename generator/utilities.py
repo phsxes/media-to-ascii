@@ -68,6 +68,17 @@ class Ascii(Image):
         temp = cv2.resize(gray, (w, h), interpolation=cv2.INTER_LINEAR)
         reference = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
 
-        # Generate resulting image
-        final = print_ascii(output)
-        return final
+        # Generating empty result image and character to intensity mapping
+        result = np.zeros((height, width), np.uint8)
+        ranges = get_ranges()
+
+        # Iterating over reference image and defining "windows" to calculate
+        # average intensity and apply a character
+        for y in range(13, height, 13):
+            for x in range(0, width, 10):
+                window = reference[y:y + 13, x:x + 10]
+                avg = np.average(window)
+                closest_key = min(ranges.keys(), key=lambda i: abs(i - avg))
+                result = cv2.putText(result, ranges[closest_key], (x, y),
+                                     cv2.FONT_HERSHEY_SIMPLEX, 0.3, (255, 255, 255), 1)
+        return result
