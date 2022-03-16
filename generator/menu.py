@@ -21,6 +21,11 @@ def open_img():
     img_path = open_file()
     source = generator.utilities.Image(img_path)
     result = generator.utilities.Ascii(img_path)
+
+    # Save generate image in current directory
+    result.save()
+
+    # Generate preview of source and result images
     preview_src = source.preview(h=500)
     preview_res = result.preview(h=500)
     update_panels(preview_src, preview_res)

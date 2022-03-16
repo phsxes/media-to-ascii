@@ -82,3 +82,6 @@ class Ascii(Image):
                 result = cv2.putText(result, ranges[closest_key], (x, y),
                                      cv2.FONT_HERSHEY_SIMPLEX, 0.3, (255, 255, 255), 1)
         return result
+
+    def save(self):
+        cv2.imwrite("ASCII.png", self.data)
