@@ -44,6 +44,14 @@ class Image:
         return image
 
 
+def get_ranges():
+    symbols = " '`^\",:;Il!i><~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
+    step = 255/len(symbols)
+    ranges = np.arange(0, 255+step, step)
+    ranges = dict(zip(ranges, symbols))
+    return ranges
+
+
 class Ascii(Image):
 
     def __init__(self, path):
