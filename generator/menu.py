@@ -1,6 +1,8 @@
+import tkinter.messagebox
 from tkinter import *
 from tkinter import filedialog
 import generator.utilities
+import os
 
 # Main window configuration
 root = Tk()
@@ -17,8 +19,15 @@ def open_file():
 
 def open_img():
 
-    # Open selected file and create image object instances
+    # Open selected file and validate image extension
     img_path = open_file()
+    if os.path.splitext(img_path)[-1] not in ['.png', '.jpg', '.jpeg']:
+        tkinter.messagebox.showinfo(title='Warning',
+                                    message='File type not supported. '
+                                            'Only PNG and JPG/JPEG images are allowed.')
+        return
+
+    # Create image object instances
     source = generator.utilities.Image(img_path)
     result = generator.utilities.Ascii(img_path)
 
