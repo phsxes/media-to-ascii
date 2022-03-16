@@ -1,2 +1,5 @@
 # Environments
 .venv/
+
+# generate images
+ASCII.png
