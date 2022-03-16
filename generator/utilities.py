@@ -61,11 +61,12 @@ class Ascii(Image):
     def generate_ascii(self):
         image = self.data
 
-        # "Pixelating" image to smooth out busy images
-        height, width = image.shape[:2]
+        # "Pixelating" reference image to smooth out busy images
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        height, width = gray.shape[:2]
         h, w = (int(height / 13), int(width / 10))
-        temp = cv2.resize(image, (w, h), interpolation=cv2.INTER_LINEAR)
-        output = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
+        temp = cv2.resize(gray, (w, h), interpolation=cv2.INTER_LINEAR)
+        reference = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
 
         # Generate resulting image
         final = print_ascii(output)
