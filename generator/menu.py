@@ -21,7 +21,7 @@ def open_img():
 
     # Open selected file and validate image extension
     img_path = open_file()
-    if os.path.splitext(img_path)[-1] not in ['.png', '.jpg', '.jpeg']:
+    if os.path.splitext(img_path.lower())[-1] not in ['.png', '.jpg', '.jpeg']:
         tkinter.messagebox.showinfo(title='Warning',
                                     message='File type not supported. '
                                             'Only PNG and JPG/JPEG images are allowed.')
