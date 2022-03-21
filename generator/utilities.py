@@ -77,10 +77,13 @@ class Ascii(Image):
         for y in range(13, height, 13):
             for x in range(0, width, 10):
                 window = reference[y:y + 13, x:x + 10]
+                wdw_color = image[y:y + 13, x:x + 10, :]
+                colors, count = np.unique(wdw_color.reshape(-1, wdw_color.shape[-1]), axis=0, return_counts=True)
+                bg_color = [int(i) for i in colors[count.argmax()]]
                 avg = np.average(window)
                 closest_key = min(ranges.keys(), key=lambda i: abs(i - avg))
                 result = cv2.putText(result, ranges[closest_key], (x, y),
-                                     cv2.FONT_HERSHEY_SIMPLEX, 0.3, (255, 255, 255), 1)
+                                     cv2.FONT_HERSHEY_SIMPLEX, 0.3, bg_color, 1)
         return result
 
     def save(self):
