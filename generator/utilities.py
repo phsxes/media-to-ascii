@@ -64,12 +64,12 @@ class Ascii(Image):
         # "Pixelating" reference image to smooth out busy images
         gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         height, width = gray.shape[:2]
-        h, w = (int(height / 13), int(width / 10))
+        h, w = (int(height / 7), int(width / 5))
         temp = cv2.resize(gray, (w, h), interpolation=cv2.INTER_LINEAR)
         reference = cv2.resize(temp, (width, height), interpolation=cv2.INTER_NEAREST)
 
         # Generating empty result image and character to intensity mapping
-        result = np.zeros((height, width), np.uint8)
+        result = np.zeros((height, width, 3), np.uint8)
         ranges = get_ranges()
 
         # Iterating over reference image and defining "windows" to calculate
