@@ -64,5 +64,5 @@ def get_ascii_from_media(path):
 
     log.info(f"ASCII media generated. Saving...")
     with ImageSequenceClip(result, fps=int(fps)) as clip:
-        clip.write_gif(f'ascii{ext}')
+        clip.write_gif(f'ASCII{ext}')
     log.info(f"Done.")
