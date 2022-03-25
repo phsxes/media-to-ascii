@@ -8,8 +8,9 @@ pip install .
 
 ## Usage
 ```shell
-python main.py path_to_image_to_convert.jpg
+python -m media2ascii.generate file_in_current_directory.jpg
 ```
+This will generate a file named ASCII, with the same file extension as the input file.
 
 ### To do
 * Fix logic with small images
