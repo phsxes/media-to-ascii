@@ -1,4 +1,4 @@
-import media
+import media2ascii.media as media
 import typer
 import logging
 import sys
@@ -15,7 +15,9 @@ app = typer.Typer()
 
 # main execution
 @app.command()
-def main(input_path: str):
+def generate(filename: str):
+    input_path = os.path.join(os.getcwd(), filename.lower())
+    print(input_path)
     exists = os.path.exists(input_path)
     if not exists:
         log.info("ERROR: File does not exists or is not readable.")
