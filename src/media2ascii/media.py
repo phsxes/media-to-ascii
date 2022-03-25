@@ -1,9 +1,9 @@
 from moviepy.editor import ImageSequenceClip
 from moviepy.editor import VideoFileClip
+import media2ascii.ascii
 from tqdm import tqdm
 import logging
 import os.path
-import ascii
 import cv2
 
 # Logger
@@ -39,8 +39,8 @@ def get_ascii_from_image(path):
     log.info(f"Reading {path.split('/')[-1]}...")
     img = cv2.imread(path)
     ext = os.path.splitext(path)[1]
-    ranges = ascii.get_ranges()
-    ascii_img = ascii.generate_ascii(img, ranges)
+    ranges = media2ascii.ascii.get_ranges()
+    ascii_img = media2ascii.ascii.generate_ascii(img, ranges)
     log.info(f"ASCII image generated. Saving...")
     cv2.imwrite(f'ascii{ext}', ascii_img)
     log.info(f"Done.")
@@ -52,13 +52,13 @@ def get_ascii_from_media(path):
     data = cv2.VideoCapture(path)
     fps = VideoFileClip(path).fps
     frames = _get_frames_from_media(data)
-    ranges = ascii.get_ranges()
+    ranges = media2ascii.ascii.get_ranges()
     result = []
 
     for frame in tqdm(frames):
         if frame is None:
             continue
-        generated_frame = ascii.generate_ascii(frame, ranges)
+        generated_frame = media2ascii.ascii.generate_ascii(frame, ranges)
         rgb_frame = cv2.cvtColor(generated_frame, cv2.COLOR_BGR2RGB)
         result.append(rgb_frame)
 
